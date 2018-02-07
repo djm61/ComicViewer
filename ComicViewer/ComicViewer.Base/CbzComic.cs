@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using ICSharpCode.SharpZipLib.Zip;
 
 namespace ComicViewer.Base
@@ -67,6 +66,12 @@ namespace ComicViewer.Base
                     }
                 }
             }
+        }
+
+        public override string GetPage(int page)
+        {
+            //todo fill in code
+            return string.Empty;
         }
     }
 }

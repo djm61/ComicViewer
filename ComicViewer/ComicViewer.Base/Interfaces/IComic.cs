@@ -5,5 +5,7 @@
         double BytesToMegaBytes(long bytes);
 
         void GenerateCover();
+
+        string GetPage(int page);
     }
 }

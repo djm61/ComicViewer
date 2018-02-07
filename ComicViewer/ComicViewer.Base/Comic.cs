@@ -114,5 +114,7 @@ namespace ComicViewer.Base
         }
 
         public abstract void GenerateCover();
+
+        public abstract string GetPage(int page);
     }
 }
