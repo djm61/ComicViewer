@@ -4,14 +4,13 @@ using SharpCompress.Archives;
 using SharpCompress.Archives.Rar;
 using SharpCompress.Readers;
 
-namespace ComicViewer.Base
+namespace ComicViewer.Base.Comic
 {
     public class CbrComic : Comic
     {
         public CbrComic(string path)
             : base(path)
         {
-            GenerateCover();
         }
 
         public override void GenerateCover()
@@ -28,9 +27,17 @@ namespace ComicViewer.Base
                 var firstEntry = rarFile.Entries.FirstOrDefault(e => !e.IsDirectory);
                 if (firstEntry != null)
                 {
-                    firstEntry.WriteToDirectory(path, new ExtractionOptions { Overwrite = true });
-                    var fi = new FileInfo($"{path}\\{firstEntry.Key}");
-                    CoverPath = fi.FullName;
+                    if (File.Exists($"{path}\\{firstEntry.Key}"))
+                    {
+                        var fi = new FileInfo(path);
+                        CoverPath = fi.FullName;
+                    }
+                    else
+                    {
+                        firstEntry.WriteToDirectory(path, new ExtractionOptions { Overwrite = true });
+                        var fi = new FileInfo($"{path}\\{firstEntry.Key}");
+                        CoverPath = fi.FullName;
+                    }
                 }
             }
         }

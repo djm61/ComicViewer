@@ -2,13 +2,12 @@
 using System.IO;
 using ComicViewer.Base.Interfaces;
 
-namespace ComicViewer.Base
+namespace ComicViewer.Base.Comic
 {
     public abstract class Comic : IComic
     {
-        private string _coverPath;
-        private string _errorMessage;
-        private int _pageCount;
+        public const int FirstPage = 0;
+
         private FileInfo _file;
 
         /// <summary>
@@ -36,48 +35,28 @@ namespace ComicViewer.Base
         /// <summary>
         /// 
         /// </summary>
-        public string CoverPath
+        public string CoverPath { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double FileSize
         {
             get
             {
-                return _coverPath;
-            }
-            set
-            {
-                _coverPath = value;
+                return BytesToMegaBytes(_file.Length);
             }
         }
 
         /// <summary>
         /// 
         /// </summary>
-        public long FileSize
-        {
-            get
-            {
-                return (long)BytesToMegaBytes(_file.Length);
-            }
-        }
+        public int PageCount { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public int PageCount
-        {
-            get
-            {
-                return _pageCount;
-            }
-            set
-            {
-                _pageCount = value;
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public FileInfo ComicFile
+        private FileInfo ComicFile
         {
             set
             {
@@ -88,19 +67,9 @@ namespace ComicViewer.Base
         /// <summary>
         /// 
         /// </summary>
-        public string ErrorMessage
-        {
-            get
-            {
-                return _errorMessage;
-            }
-            set
-            {
-                _errorMessage = value;
-            }
-        }
+        protected string ErrorMessage { get; set; }
 
-        public Comic(string path)
+        protected Comic(string path)
         {
             ComicFile = new FileInfo(path);
         }

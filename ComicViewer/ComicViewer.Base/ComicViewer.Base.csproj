@@ -46,10 +46,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CbrComic.cs" />
-    <Compile Include="CbzComic.cs" />
-    <Compile Include="Comic.cs" />
+    <Compile Include="Comic\CbrComic.cs" />
+    <Compile Include="Comic\CbzComic.cs" />
+    <Compile Include="Comic\Comic.cs" />
+    <Compile Include="ComicException.cs" />
+    <Compile Include="ComicFactory.cs" />
     <Compile Include="Interfaces\IComic.cs" />
+    <Compile Include="Interfaces\IComicFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

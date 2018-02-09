@@ -1,14 +1,13 @@
 ﻿using System.IO;
 using ICSharpCode.SharpZipLib.Zip;
 
-namespace ComicViewer.Base
+namespace ComicViewer.Base.Comic
 {
     public class CbzComic : Comic
     {
         public CbzComic(string path)
             : base(path)
         {
-            GenerateCover();
         }
 
         public override void GenerateCover()
@@ -28,12 +27,10 @@ namespace ComicViewer.Base
                     var directoryName = Path.GetDirectoryName(theEntry.Name);
                     var fileName = Path.GetFileName(theEntry.Name);
 
-                    // create directory if the archive has a folder at root
                     if (!string.IsNullOrWhiteSpace(directoryName) && directoryName.Length > 0)
                     {
                         var fDirectory = Path.GetTempPath() + directoryName;
 
-                        //We need to delete the directory is it's already there so we get the first entry
                         if (Directory.Exists(fDirectory))
                         {
                             Directory.Delete(fDirectory, true);
@@ -43,8 +40,14 @@ namespace ComicViewer.Base
 
                     var fullPath = Path.GetTempPath() + theEntry.Name;
 
-                    if (fileName != string.Empty && !File.Exists(fullPath))
+                    if (!string.IsNullOrWhiteSpace(fileName))
                     {
+                        if (File.Exists(fullPath))
+                        {
+                            CoverPath = fullPath;
+                            return;
+                        }
+
                         using (var streamWriter = File.Create(fullPath))
                         {
                             var data = new byte[2048];
@@ -60,8 +63,9 @@ namespace ComicViewer.Base
                                     break;
                                 }
                             }
+
                             CoverPath = fullPath;
-                            return; //Just return the 1st entry in the archive
+                            return;
                         }
                     }
                 }
