@@ -77,5 +77,19 @@ namespace ComicViewer.Base.Comic
             //todo fill in code
             return string.Empty;
         }
+
+        public override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+
+            }
+            base.Dispose(disposing);
+        }
+
+        public override void Dispose()
+        {
+            Dispose(true);
+        }
     }
 }

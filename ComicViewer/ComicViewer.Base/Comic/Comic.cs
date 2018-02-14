@@ -6,6 +6,7 @@ namespace ComicViewer.Base.Comic
 {
     public abstract class Comic : IComic
     {
+        private const string ComicViewerName = "ComicViewer";
         public const int FirstPage = 0;
 
         private FileInfo _file;
@@ -13,12 +14,41 @@ namespace ComicViewer.Base.Comic
         /// <summary>
         /// 
         /// </summary>
-        public string FileName
+        protected string TempPath
         {
             get
             {
-                return _file.Name;
+                var path = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
+                path = Path.Combine(path, ComicViewerName);
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+
+                path = Path.Combine(path, FileNameNoExtension);
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+
+                return path;
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string FileName
+        {
+            get { return _file.Name; }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string FileNameNoExtension
+        {
+            get { return _file.Name.Replace(_file.Extension, string.Empty); }
         }
 
         /// <summary>
@@ -26,10 +56,7 @@ namespace ComicViewer.Base.Comic
         /// </summary>
         public string FilePath
         {
-            get
-            {
-                return _file.FullName;
-            }
+            get { return _file.FullName; }
         }
 
         /// <summary>
@@ -42,10 +69,7 @@ namespace ComicViewer.Base.Comic
         /// </summary>
         public double FileSize
         {
-            get
-            {
-                return BytesToMegaBytes(_file.Length);
-            }
+            get { return BytesToMegaBytes(_file.Length); }
         }
 
         /// <summary>
@@ -58,10 +82,7 @@ namespace ComicViewer.Base.Comic
         /// </summary>
         private FileInfo ComicFile
         {
-            set
-            {
-                _file = value;
-            }
+            set { _file = value; }
         }
 
         /// <summary>
@@ -85,5 +106,19 @@ namespace ComicViewer.Base.Comic
         public abstract void GenerateCover();
 
         public abstract string GetPage(int page);
+
+        public virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+
+            }
+        }
+
+        public virtual void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
     }
 }

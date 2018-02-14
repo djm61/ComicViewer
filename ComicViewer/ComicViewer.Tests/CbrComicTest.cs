@@ -43,5 +43,33 @@ namespace ComicViewer.Tests
             var size = _comic.FileSize;
             Assert.IsTrue(size > 0);
         }
+
+        [TestMethod]
+        public void InitialSolicComic_Default_ValidOutput()
+        {
+            _path = Path.Combine("ComicFiles", "solidComic.cbr");
+
+            _factory = new ComicFactory(_path);
+            _comic = _factory.Build();
+
+            Assert.IsNotNull(_comic);
+
+            _comic.GenerateCover();
+
+            var cover = _comic.CoverPath;
+            Assert.IsFalse(string.IsNullOrWhiteSpace(cover));
+
+            var pages = _comic.PageCount;
+            Assert.IsTrue(pages > 0);
+
+            var fileName = _comic.FileName;
+            Assert.IsFalse(string.IsNullOrWhiteSpace(fileName));
+
+            var filePath = _comic.FilePath;
+            Assert.IsFalse(string.IsNullOrWhiteSpace(filePath));
+
+            var size = _comic.FileSize;
+            Assert.IsTrue(size > 0);
+        }
     }
 }
