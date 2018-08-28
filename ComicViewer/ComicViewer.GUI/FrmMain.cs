@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 using ComicViewer.Base;
 using ComicViewer.Base.Comic;
@@ -17,7 +18,7 @@ namespace ComicViewer.GUI
             pbMain.SizeMode = PictureBoxSizeMode.AutoSize;
         }
 
-        private void btnOpen_Click(object sender, System.EventArgs e)
+        private void btnOpen_Click(object sender, EventArgs e)
         {
             using (var dialog = new OpenFileDialog())
             {
@@ -26,13 +27,21 @@ namespace ComicViewer.GUI
                 dialog.DefaultExt = "*.cbr|*.cbz";
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
-                    var path = dialog.FileName;
-                    _comicFactory = new ComicFactory(path);
-                    _comic = _comicFactory.Build();
-                    _comic.GenerateCover();
-                    var bitmap = new Bitmap(_comic.CoverPath);
-                    pbMain.Image = bitmap;
-                    pbMain.SizeMode = PictureBoxSizeMode.AutoSize;
+                    try
+                    {
+                        var path = dialog.FileName;
+                        _comicFactory = new ComicFactory(path);
+                        _comic = _comicFactory.Build();
+                        _comic.GenerateCover();
+                        var bitmap = new Bitmap(_comic.CoverPath);
+                        pbMain.Image = bitmap;
+                        pbMain.SizeMode = PictureBoxSizeMode.AutoSize;
+                    }
+                    catch (Exception ex)
+                    {
+                        var message = $"{_comic.ErrorMessage}\r\n{ex.Message}";
+                        MessageBox.Show(message);
+                    }
                 }
             }
         }

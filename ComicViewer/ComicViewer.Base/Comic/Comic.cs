@@ -88,7 +88,7 @@ namespace ComicViewer.Base.Comic
         /// <summary>
         /// 
         /// </summary>
-        protected string ErrorMessage { get; set; }
+        public string ErrorMessage { get; set; }
 
         protected Comic(string path)
         {
