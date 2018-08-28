@@ -32,14 +32,7 @@ namespace ComicViewer.Base.Comic
                     var file = Directory.GetFiles(TempPath)
                         .Select(fi => new FileInfo(fi))
                         .FirstOrDefault();
-#if DEBUG
-                    var debugFiles1 = Directory.GetFiles(TempPath);
-                    var debugFiles2 = Directory.GetFiles(TempPath)
-                        .Select(fi => new FileInfo(fi));
-                    var debugFiles3 = Directory.GetFiles(TempPath)
-                        .Select(fi => new FileInfo(fi))
-                        .FirstOrDefault();
-#endif
+
                     if (file == null)
                     {
                         throw new ComicException($"File is missing in {TempPath}");
@@ -54,7 +47,8 @@ namespace ComicViewer.Base.Comic
                     {
                         if (File.Exists($"{TempPath}\\{firstEntry.Key}"))
                         {
-                            var fi = new FileInfo(TempPath);
+                            var file = Path.Combine(TempPath, firstEntry.Key);
+                            var fi = new FileInfo(file);
                             CoverPath = fi.FullName;
                         }
                         else

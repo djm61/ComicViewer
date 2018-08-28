@@ -17,7 +17,7 @@ namespace ComicViewer.Base
         {
             if (string.IsNullOrWhiteSpace(fileName))
             {
-                throw new ComicException($"FileName is null or empty or whitespace");
+                throw new ComicException("FileName is null or empty or whitespace");
             }
 
             _fileName = fileName;

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using ComicViewer.Base.Interfaces;
 
 namespace ComicViewer.Base.Comic
@@ -7,6 +8,7 @@ namespace ComicViewer.Base.Comic
     public abstract class Comic : IComic
     {
         private const string ComicViewerName = "ComicViewer";
+        private const int FileAge = 14;
         public const int FirstPage = 0;
 
         private FileInfo _file;
@@ -106,7 +108,7 @@ namespace ComicViewer.Base.Comic
         public abstract void GenerateCover();
 
         public abstract string GetPage(int page);
-
+        
         public virtual void Dispose(bool disposing)
         {
             if (disposing)

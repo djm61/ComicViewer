@@ -30,6 +30,7 @@
         {
             this.pbMain = new System.Windows.Forms.PictureBox();
             this.btnOpen = new System.Windows.Forms.Button();
+            this.lblScale = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pbMain)).BeginInit();
             this.SuspendLayout();
             // 
@@ -44,6 +45,7 @@
             this.pbMain.Size = new System.Drawing.Size(508, 572);
             this.pbMain.TabIndex = 0;
             this.pbMain.TabStop = false;
+            this.pbMain.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pbMain_MouseClick);
             // 
             // btnOpen
             // 
@@ -56,12 +58,23 @@
             this.btnOpen.UseVisualStyleBackColor = true;
             this.btnOpen.Click += new System.EventHandler(this.btnOpen_Click);
             // 
+            // lblScale
+            // 
+            this.lblScale.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblScale.AutoSize = true;
+            this.lblScale.Location = new System.Drawing.Point(528, 67);
+            this.lblScale.Name = "lblScale";
+            this.lblScale.Size = new System.Drawing.Size(44, 13);
+            this.lblScale.TabIndex = 2;
+            this.lblScale.Text = "lblScale";
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(598, 597);
+            this.Controls.Add(this.lblScale);
             this.Controls.Add(this.btnOpen);
             this.Controls.Add(this.pbMain);
             this.Name = "FrmMain";
@@ -69,6 +82,7 @@
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             ((System.ComponentModel.ISupportInitialize)(this.pbMain)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -76,6 +90,7 @@
 
         private System.Windows.Forms.PictureBox pbMain;
         private System.Windows.Forms.Button btnOpen;
+        private System.Windows.Forms.Label lblScale;
     }
 }
 
