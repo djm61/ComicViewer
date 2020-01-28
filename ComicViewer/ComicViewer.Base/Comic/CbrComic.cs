@@ -2,6 +2,7 @@
 using System.Linq;
 using SharpCompress.Archives;
 using SharpCompress.Archives.Rar;
+using SharpCompress.Common;
 using SharpCompress.Readers;
 
 namespace ComicViewer.Base.Comic

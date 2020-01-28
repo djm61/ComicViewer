@@ -25,7 +25,7 @@ namespace ComicViewer.Tests
         public void InitialComic_Default_ValidOutput()
         {
             Assert.IsNotNull(_comic);
-            
+
             _comic.GenerateCover();
 
             var cover = _comic.CoverPath;
